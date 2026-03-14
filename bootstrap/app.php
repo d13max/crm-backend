@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Http\Middleware\ForceJsonMiddleware;
 use Illuminate\Foundation\Application;
@@ -11,11 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
+    ->withMiddleware(static function (Middleware $middleware): void {
         $middleware->api(append: [
             ForceJsonMiddleware::class,
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->shouldRenderJsonWhen(static fn(): true => true);
+    ->withExceptions(static function (Exceptions $exceptions): void {
+        $exceptions->shouldRenderJsonWhen(static fn (): true => true);
     })->create();

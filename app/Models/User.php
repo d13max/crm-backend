@@ -13,18 +13,20 @@ use Override;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory;
-
     /** @use HasApiTokens<PersonalAccessToken> */
     use HasApiTokens;
 
-    use Notifiable;
-    use HasUuids;
+    /** @use HasFactory<UserFactory> */
+    use HasFactory;
 
-    /** @var array<string> */
+    use HasUuids;
+    use Notifiable;
+
+    /** @var list<string> */
+    #[Override]
     protected $hidden = ['password', 'remember_token'];
 
+    #[Override]
     protected $table = 'users';
 
     /** @return array<string, string> */

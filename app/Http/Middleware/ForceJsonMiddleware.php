@@ -9,11 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 final readonly class ForceJsonMiddleware
 {
     /**
-     * @param Closure(Request): (Response) $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
         $request->headers->set('Accept', 'application/json');
+
         return $next($request);
     }
 }
